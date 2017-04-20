@@ -116,8 +116,6 @@
                             };
                             var formatter = new google.visualization.DateFormat({pattern: 'HH:mm:ss'});
                             formatter.format(data, 1);
-
-                            
                             chart_div.show();
                             loading.hide();
                             var chart = new google.visualization.ColumnChart(chart_div[0]);
@@ -138,6 +136,7 @@
             <ul>
                 <li><a href="/static/presence_weekday.html">Presence by weekday</a></li>
                 <li id="selected"><a href="/static/mean_time_weekday.html">Presence mean time</a></li>
+                <li><a href="/static/presence_start_end.html">Presence start-end</a></li>
             </ul>
         </div>
         <div id="content">
