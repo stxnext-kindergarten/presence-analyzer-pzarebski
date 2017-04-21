@@ -75,7 +75,7 @@ def group_by_weekday(items):
     """
     Groups presence entries by weekday.
     """
-    result = [[], [], [], [], [], [], []]  # one list for every day in week
+    result = [[] for i in range(7)]  # one list for every day in week
     for date in items:
         start = items[date]['start']
         end = items[date]['end']
@@ -102,3 +102,32 @@ def mean(items):
     Calculates arithmetic mean. Returns zero for empty lists.
     """
     return float(sum(items)) / len(items) if len(items) > 0 else 0
+
+
+def group_by_weekday_start_end(items):
+    """
+    Groups start time and end time by weekday.
+    
+    It creates structure like this:
+    result = [
+        {
+            'start': [39973, 35827, 31253, 32084, 40358],
+            'end': [70900, 61024, 61184, 55828, 70840],
+        },
+        {
+            'start': [33058, 39177, 31018],
+            'end': [61740, 71032, 70742],
+        }
+    ]
+    """
+    result = [{} for i in range(7)]  # one dict for every day in week
+    for date in items:
+        start = items[date]['start']
+        end = items[date]['end']
+        result[date.weekday()].setdefault('start', []).append(
+            seconds_since_midnight(start)
+        )
+        result[date.weekday()].setdefault('end', []).append(
+            seconds_since_midnight(end)
+        )
+    return result
